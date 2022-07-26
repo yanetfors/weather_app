@@ -18,7 +18,8 @@ tendrán el formato YYYY_mm_dd-H  (Ejemplo: 2002_07_25-10), de manera que se pue
 
 ## Propuestas de Mejoras: 
 * Ejecutar el proceso ETL con Airflow (la primera propuesta la estaba desarrollando con Airflow pero tuve un issue que no se podía conectar al Postgres, y probé varios cambios pero no pude solucionarlo)
-* En el caso que se pueda ejecutar con Airlow, modularizar mejor la solución de manera que queden bien definidas las tareas que se van a ejecutar en el Dag
+* En el caso que se pueda ejecutar con Airlow, modularizar mejor la solución de manera que queden bien definidas las tareas que se van a ejecutar en el Dag.
+* Renombrar los campos de los datasets para que se entienda mejor el significado del dato.
 * Agregar Pruebas Unitarias.
 * Guardar los archivos en la nube (buckets de S3 para las zonas de raw y stg)
 * Valorar el uso de Spark dependiendo del volumen de datos y cuanto más se necesite procesar.
