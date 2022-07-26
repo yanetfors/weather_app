@@ -1,0 +1,1 @@
+En esta carpeta se guardarán los archivos en formato parquet
