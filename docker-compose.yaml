@@ -1,0 +1,45 @@
+version: "3.8"
+# Optional Jupyter Notebook service
+services:
+  python_etl:
+    build: .
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - etl_network
+
+  database:
+    image: postgres:11
+    container_name: database
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    environment:
+      POSTGRES_DB: "weather_forecast"
+      POSTGRES_HOST: "localhost"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: "postgres"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-U",
+          "postgres",
+          "-d",
+          "weather_forecast"
+        ]
+      interval: 5s
+      retries: 5
+    restart: always
+    volumes:
+      - /tmp/pg-data/:/var/lib/postgresql/data/
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - etl_network
+
+networks:
+  etl_network:
